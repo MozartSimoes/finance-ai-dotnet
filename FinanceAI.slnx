@@ -1,0 +1,12 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/FinanceAI.Api/FinanceAI.Api.csproj" />
+    <Project Path="src/FinanceAI.Application/FinanceAI.Application.csproj" />
+    <Project Path="src/FinanceAI.Domain/FinanceAI.Domain.csproj" />
+    <Project Path="src/FinanceAI.Infrastructure/FinanceAI.Infrastructure.csproj" />
+    <Project Path="src/FinanceAI.ML/FinanceAI.ML.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/FinanceAI.UnitTests/FinanceAI.UnitTests.csproj" />
+  </Folder>
+</Solution>
