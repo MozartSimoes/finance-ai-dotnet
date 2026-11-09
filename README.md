@@ -79,6 +79,19 @@ As credenciais do `docker-compose.yml` e do `appsettings.json` servem só para o
 | POST | `/api/transactions/classify` | Mostra a categoria prevista, sem salvar |
 | GET | `/api/reports/monthly-summary/{ano}/{mes}` | Receitas, despesas, saldo e totais por categoria |
 
+## Uso de IA
+
+O projeto foi desenvolvido com o **Claude Code** (Anthropic) como par de programação.
+
+**Onde a IA ajudou:** estrutura da solução, primeira versão do código e dos testes, configuração de Docker e CI, e o rascunho deste README.
+
+**Meu papel:** definir o escopo e as decisões de arquitetura, revisar o código, rodar e depurar localmente no Visual Studio e validar os resultados com o banco real.
+
+**O que foi corrigido ou decidido diferente do que a IA propôs:**
+- **Meta de acurácia do modelo:** o primeiro teste exigia acurácia de 50%, e a validação cruzada mostrou ~39%. A IA tentou outro algoritmo (`LbfgsMaximumEntropy`) com n-gramas customizados, e o resultado piorou para ~10%. Comparando várias configurações, todas ficaram entre 37% e 41%: o limite era a quantidade de dados, não o algoritmo. Voltei ao pipeline mais simples e ajustei o teste para 30% (3× o chute aleatório), documentando o motivo em vez de esconder o número.
+- **Script do banco:** um ajuste automático quebrou o caminho do recurso embutido (`Persistence/schema.sql` virou `Persistenceschema.sql`), e a API não encontrava o script. Detectado ao rodar e corrigido.
+- **Testes de ponta a ponta:** cada endpoint foi exercitado contra o PostgreSQL real (classificação, paginação, resumo mensal, respostas 400/404/409), sem confiar apenas nos testes unitários.
+
 ## Autor
 
 **Mozart Mota Simões**, desenvolvedor .NET sênior e AWS Certified (Solutions Architect e Developer, Associate).
